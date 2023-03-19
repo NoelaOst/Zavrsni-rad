@@ -1,38 +1,112 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
+  font-size: 1rem;
   color: white;
+  background: linear-gradient(45deg, #1e4269, #001f46);
+  background-size: 250%;
+  background-position: top left;
+  animation: color-change 15s infinite alternate;
+  position: relative;
+  bottom: 0;
+}
+@keyframes color-change {
+  100% {
+    background-position: bottom right;
+  }
+}
+.chat-heading {
+  color: #ffffff;
+  padding: 10px;
+}
+.avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.username {
+  display: block;
+  color: #fff;
+  font-size: 16px;
+  padding-bottom: 4px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.messages-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  margin-block: 4rem;
+  max-width: 900px;
+}
+.my-message-container {
+  display: flex;
+  justify-content: flex-end;
+  border-radius: 40px;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.client-message-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: 40px;
+  flex-direction: column;
+}
+.user-container {
+  display: flex;
+  flex-direction: row;
+}
+.input-container {
+  margin: 5vh;
+}
+input {
+  padding: 15px;
+  min-width: 30vw;
+  font-size: 16px;
+  border-radius: 40px;
+  flex-grow: 1;
+  outline: none;
+  border: none;
+  background-color: #fefefe;
+}
+
+input::placeholder {
+  text-align: left;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 16px;
+  background: linear-gradient(to left, #00afd9, #015da3);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  margin-left: 10px;
+}
+button:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 20px 0 #3080ef63;
+}
+.message {
+  margin-inline: 20px;
+  padding: 10px;
+}
+.my-message {
+  background: #015da3;
+  border-radius: 15px 15px 0 15px;
+  padding: 10px;
+  backdrop-filter: blur(30px);
+}
+.client-message {
+  background-color: #95959943;
+  border-radius: 15px 15px 15px 0;
+  padding: 10px;
+  backdrop-filter: blur(30px);
 }
