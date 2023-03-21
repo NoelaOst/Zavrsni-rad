@@ -6,7 +6,7 @@ class Input extends React.Component {
   };
 
   onSendMessage = () => {
-    this.props.sendMessage(this.state.message, "Ovo je drugi argument");
+    this.props.sendMessage(this.state.message); //prosljeđujem argument koji je state, a njega kontroliram s inputom
     this.setState({ message: "" });
   };
 

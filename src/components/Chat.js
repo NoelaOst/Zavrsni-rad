@@ -151,11 +151,10 @@ class Chat extends React.Component {
     });
   }
 
-  sendMessage = (blabla) => {
-    console.log(blabla, "ovo je blabla");
+  sendMessage = (poruka) => {
     this.drone.publish({
       room: "observable-Noela's-room",
-      message: blabla, //ovo je Scaledronov objekt koji mora biti nazvan message, njegov value je poruka koju šaljemo
+      message: poruka, //ovo je Scaledronov objekt koji mora biti nazvan message, njegov value je poruka koju šaljemo
     });
     console.log(this.state.messages);
   };
@@ -164,8 +163,8 @@ class Chat extends React.Component {
     return (
       <div>
         {this.state.messages.map((item, index) => {
-          console.log("ovo je item", item); //
-          console.log("ovo je memeber", this.state.member); //currentuser id
+          // console.log("ovo je item", item); //all members id including mine
+          // console.log("ovo je memeber", this.state.member); //currentuser/my id
           return (
             <div key={index} className="messages-wrapper">
               {item.member.id === this.state.member.id ? (
@@ -194,7 +193,7 @@ class Chat extends React.Component {
             </div>
           );
         })}
-        <Input sendMessage={(ccc, bbb) => this.sendMessage(ccc)} />
+        <Input sendMessage={this.sendMessage} />
       </div>
     );
   }
