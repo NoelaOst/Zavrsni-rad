@@ -11,8 +11,6 @@
   background-size: 250%;
   background-position: top left;
   animation: color-change 15s infinite alternate;
-  position: relative;
-  bottom: 0;
 }
 @keyframes color-change {
   100% {
@@ -59,7 +57,7 @@
   border-radius: 40px;
   flex-direction: column;
 }
-.user-container {
+.user-detail-container {
   display: flex;
   flex-direction: row;
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import Messages from "./Messages";
 import Input from "./Input";
 
 //funkcije koje trebaju biti definirane samo jednom, ne prilikom svakog rendera
@@ -162,37 +163,7 @@ class Chat extends React.Component {
   render() {
     return (
       <div>
-        {this.state.messages.map((item, index) => {
-          // console.log("ovo je item", item); //all members id including mine
-          // console.log("ovo je memeber", this.state.member); //currentuser/my id
-          return (
-            <div key={index} className="messages-wrapper">
-              {item.member.id === this.state.member.id ? (
-                <div className="my-message-container">
-                  <div className="user-container">
-                    <div
-                      className="avatar"
-                      style={{ backgroundColor: item.member.color }}
-                    ></div>
-                    <p className="username">{item.member.username}</p>
-                  </div>
-                  <p className="my-message">{item.message}</p>
-                </div>
-              ) : (
-                <div className="client-message-container">
-                  <div className="user-container">
-                    <div
-                      className="avatar"
-                      style={{ backgroundColor: item.member.color }}
-                    ></div>
-                    <p className="username">{item.member.username}</p>
-                  </div>
-                  <p className="client-message">{item.message}</p>
-                </div>
-              )}
-            </div>
-          );
-        })}
+        <Messages member={this.state.member} messages={this.state.messages} />
         <Input sendMessage={this.sendMessage} />
       </div>
     );

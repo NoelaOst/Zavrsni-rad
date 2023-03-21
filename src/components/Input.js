@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class Input extends React.Component {
   state = {
@@ -32,4 +33,9 @@ class Input extends React.Component {
     );
   }
 }
+
+Input.propTypes = {
+  sendMessage: PropTypes.func,
+};
+
 export default Input;
