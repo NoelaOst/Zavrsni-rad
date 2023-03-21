@@ -40,8 +40,9 @@
   display: flex;
   flex-direction: column;
   width: 80vw;
+  max-width: 90vw;
   margin-block: 4rem;
-  max-width: 900px;
+  margin: 0 auto;
 }
 .my-message-container {
   display: flex;
