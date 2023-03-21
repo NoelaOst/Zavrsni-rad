@@ -1,4 +1,5 @@
 import React from "react";
+import Input from "./Input";
 
 //funkcije koje trebaju biti definirane samo jednom, ne prilikom svakog rendera
 function randomName() {
@@ -110,16 +111,15 @@ function randomColor() {
 }
 
 class Chat extends React.Component {
-  state = {
-    message: "",
-    messages: [],
-    member: {
-      username: randomName(),
-      color: randomColor(),
-    },
-  };
-
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: [],
+      member: {
+        username: randomName(),
+        color: randomColor(),
+      },
+    };
     console.log("hello");
     this.drone = new window.Scaledrone("aVV3umdXEUGWDhjy", {
       data: this.state.member,
@@ -140,72 +140,61 @@ class Chat extends React.Component {
       console.log("1,2,3", message);
       const allMessages = [...this.state.messages];
       allMessages.push({
-        member: { id: member.id, ...member.clientData },
+        member: {
+          id: member.id,
+          username: member.clientData.username,
+          color: member.clientData.color,
+        },
         message,
       });
       this.setState({ messages: allMessages });
-      this.setState({ message: "" }); //vraćam input na prazno
     });
   }
-  componentWillUnmount() {
-    this.drone.close();
-  }
-  onSendMessage = () => {
+
+  sendMessage = (blabla) => {
+    console.log(blabla, "ovo je blabla");
     this.drone.publish({
       room: "observable-Noela's-room",
-      message: this.state.message,
+      message: blabla, //ovo je Scaledronov objekt koji mora biti nazvan message, njegov value je poruka koju šaljemo
     });
     console.log(this.state.messages);
   };
-  onKeyPress = (e) => {
-    //stvaram novu funkciju koju koristim za slanje poruke s enterom
-    if (e.key === "Enter") {
-      this.onSendMessage();
-    }
-  };
 
   render() {
-    // console.log("messages", this.state.messages);
     return (
       <div>
-        {this.state.messages.map((item, index) => (
-          <div key={index} className="messages-wrapper">
-            {item.member.id === this.state.member.id ? (
-              <div className="my-message-container">
-                <div className="user-container">
-                  <div
-                    className="avatar"
-                    style={{ backgroundColor: item.member.color }}
-                  ></div>
-                  <p className="username">{item.member.username}</p>
+        {this.state.messages.map((item, index) => {
+          console.log("ovo je item", item); //
+          console.log("ovo je memeber", this.state.member); //currentuser id
+          return (
+            <div key={index} className="messages-wrapper">
+              {item.member.id === this.state.member.id ? (
+                <div className="my-message-container">
+                  <div className="user-container">
+                    <div
+                      className="avatar"
+                      style={{ backgroundColor: item.member.color }}
+                    ></div>
+                    <p className="username">{item.member.username}</p>
+                  </div>
+                  <p className="my-message">{item.message}</p>
                 </div>
-                <p className="my-message">{item.message}</p>
-              </div>
-            ) : (
-              <div className="client-message-container">
-                <div className="user-container">
-                  <div
-                    className="avatar"
-                    style={{ backgroundColor: item.member.color }}
-                  ></div>
-                  <p className="username">{item.member.username}</p>
+              ) : (
+                <div className="client-message-container">
+                  <div className="user-container">
+                    <div
+                      className="avatar"
+                      style={{ backgroundColor: item.member.color }}
+                    ></div>
+                    <p className="username">{item.member.username}</p>
+                  </div>
+                  <p className="client-message">{item.message}</p>
                 </div>
-                <p className="client-message">{item.message}</p>
-              </div>
-            )}
-          </div>
-        ))}
-        <div className="input-container">
-          <input
-            type="text"
-            value={this.state.message}
-            onChange={(e) => this.setState({ message: e.target.value })}
-            onKeyPress={this.onKeyPress}
-            placeholder="Write a message..."
-            autoFocus
-          />
-          <button onClick={this.onSendMessage}>Send</button>
-        </div>
+              )}
+            </div>
+          );
+        })}
+        <Input sendMessage={(ccc, bbb) => this.sendMessage(ccc)} />
       </div>
     );
   }

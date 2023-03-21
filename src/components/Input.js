@@ -1,11 +1,35 @@
-import { useState } from "react";
+import React from "react";
 
-const Input = () => {
-  const [text, setText] = useState("");
-  const [message, setMessage] = useState(text);
+class Input extends React.Component {
+  state = {
+    message: "",
+  };
 
-  return <div></div>;
-};
+  onSendMessage = () => {
+    this.props.sendMessage(this.state.message, "Ovo je drugi argument");
+    this.setState({ message: "" });
+  };
 
+  onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      this.onSendMessage();
+    }
+  };
+
+  render() {
+    return (
+      <div className="input-container">
+        <input
+          type="text"
+          value={this.state.message}
+          onChange={(e) => this.setState({ message: e.target.value })}
+          onKeyPress={this.onKeyPress}
+          placeholder="Write a message..."
+          autoFocus
+        />
+        <button onClick={this.onSendMessage}>Send</button>
+      </div>
+    );
+  }
+}
 export default Input;
-//treba razmjestit po komponentama +, probat cu input napraviti u funkciji, ako ce mi funkcionirat
