@@ -106,7 +106,7 @@ function randomName() {
   return name;
 }
 function randomColor() {
-  const n = Math.floor(Math.random() * 0xfffff * 1000000).toString(16); //pomnožili smo s 100000, sad da je 9 znamenki što nije bilo nužno, moglo je i s 10, na kraju smo odrezali prvih 6 znamenki, iz nekog razloga Scaledronova formula je nekad bacala samo 5 znamenki
+  const n = Math.floor(Math.random() * 0xfffff * 1000000).toString(16); //pomnožili smo s 100000, sad daje 9/10 znamenki, nakon toga režemo do 6
   console.log(n);
   return "#" + n.slice(0, 6);
 }
@@ -121,7 +121,6 @@ class Chat extends React.Component {
         color: randomColor(),
       },
     };
-    console.log("hello");
     this.drone = new window.Scaledrone("aVV3umdXEUGWDhjy", {
       data: this.state.member,
     });
@@ -138,7 +137,7 @@ class Chat extends React.Component {
     const room = this.drone.subscribe("observable-Noela's-room");
 
     room.on("data", (message, member) => {
-      console.log("1,2,3", message);
+      console.log("poruka je:", message);
       const allMessages = [...this.state.messages];
       allMessages.push({
         member: {
