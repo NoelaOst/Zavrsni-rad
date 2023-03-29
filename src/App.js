@@ -1,11 +1,17 @@
 import "./App.css";
-import Chat from "./components/Chat";
+import { Link } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <h1 className="chat-heading">Noela's Chat Room</h1>
-      <Chat />
+      <div className="wrapper">
+        <h1>Welcome to Noela's Chat</h1>
+        <p>Upon your entrance you will be assigned a random pokemon name.</p>
+        <p>Let's see if you get your favorite!</p>
+        <Link to="/Chat" className="enter-chat-btn">
+          Enter Chat
+        </Link>
+      </div>
     </div>
   );
 }

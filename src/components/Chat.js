@@ -1,3 +1,4 @@
+import "../Chat.css";
 import React from "react";
 import Messages from "./Messages";
 import Input from "./Input";
@@ -124,6 +125,7 @@ class Chat extends React.Component {
     this.drone = new window.Scaledrone("aVV3umdXEUGWDhjy", {
       data: this.state.member,
     });
+
     this.drone.on("open", (error) => {
       if (error) {
         return console.error(error);
@@ -161,7 +163,8 @@ class Chat extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="Chat">
+        <h1 className="chat-heading">Noela's Chat Room</h1>
         <Messages member={this.state.member} messages={this.state.messages} />
         <Input sendMessage={this.sendMessage} />
       </div>
